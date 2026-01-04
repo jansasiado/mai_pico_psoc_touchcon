@@ -375,23 +375,23 @@
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="m0s8peripheralclock" version="1.0" instance="oJC-4KdE3II">
+                <Personality template="m0s8peripheralclock" version="1.0" instance="8Xw_HbeQYoM">
                     <Block location="peri[0].div_16[1]" locked="true"/>
                     <Parameters>
                         <Param id="calc" value="man"/>
-                        <Param id="desFreq" value="48000000.000000"/>
+                        <Param id="desFreq" value="24000000.000000"/>
                         <Param id="fracDivider" value="0"/>
-                        <Param id="intDivider" value="2"/>
+                        <Param id="intDivider" value="1"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="m0s8peripheralclock" version="1.0" instance="Elajm3Vi5Pc">
+                <Personality template="m0s8peripheralclock" version="1.0" instance="lfMWBC7yswE">
                     <Block location="peri[0].div_16[2]" locked="true"/>
                     <Parameters>
                         <Param id="calc" value="man"/>
-                        <Param id="desFreq" value="48000000.000000"/>
+                        <Param id="desFreq" value="24000000.000000"/>
                         <Param id="fracDivider" value="0"/>
-                        <Param id="intDivider" value="1"/>
+                        <Param id="intDivider" value="2"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
@@ -447,29 +447,20 @@
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
-                <Personality template="m0s8i2c" version="1.0" instance="B6ZfhjeVzeQ">
+                <Personality template="m0s8ezi2c" version="1.0" instance="B6ZfhjeVzeQ">
                     <Block location="scb[1]" locked="true">
                         <Aliases>
                             <Alias value="CYBSP_I2C"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="AcceptAddress" value="false"/>
-                        <Param id="AcceptGeneralCall" value="false"/>
-                        <Param id="CallbackDS" value="false"/>
                         <Param id="CallbackDSName" value="DsClockConfigCallback"/>
                         <Param id="DataRate" value="400"/>
-                        <Param id="EnableRxFifo" value="true"/>
-                        <Param id="EnableTxFifo" value="true"/>
                         <Param id="EnableWakeup" value="false"/>
-                        <Param id="ManualDataRateCtrl" value="false"/>
-                        <Param id="ManualDigitalFilter" value="true"/>
-                        <Param id="ManualHighPhaseDutyCycle" value="9"/>
-                        <Param id="ManualLowPhaseDutyCycle" value="16"/>
-                        <Param id="ModeUser" value="CY_SCB_I2C_SLAVE"/>
-                        <Param id="RxAddressFifoDelay" value="6"/>
-                        <Param id="SlaveAddress" value="91"/>
-                        <Param id="SlaveAddressMask" value="254"/>
+                        <Param id="NumOfAddr" value="CY_SCB_EZI2C_ONE_ADDRESS"/>
+                        <Param id="SlaveAddress1" value="8"/>
+                        <Param id="SlaveAddress2" value="9"/>
+                        <Param id="SubAddrSize" value="CY_SCB_EZI2C_SUB_ADDR8_BITS"/>
                         <Param id="inFlash" value="true"/>
                     </Parameters>
                 </Personality>
@@ -536,7 +527,7 @@
                 </Net>
                 <Net>
                     <Port name="csd[0].csd[0].clock[0]"/>
-                    <Port name="peri[0].div_16[2].clk[0]"/>
+                    <Port name="peri[0].div_16[1].clk[0]"/>
                 </Net>
                 <Net>
                     <Port name="ioss[0].port[0].pin[4].digital_inout[0]"/>
@@ -559,7 +550,7 @@
                     <Port name="scb[0].clock[0]"/>
                 </Net>
                 <Net>
-                    <Port name="peri[0].div_16[1].clk[0]"/>
+                    <Port name="peri[0].div_16[2].clk[0]"/>
                     <Port name="scb[1].clock[0]"/>
                 </Net>
                 <Mux name="sense" location="csd[0].csd[0]">

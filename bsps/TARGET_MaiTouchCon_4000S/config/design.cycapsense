@@ -124,12 +124,12 @@
                 <Property id="IDAC_GAIN_INDEX" value="GAIN_2400"/>
                 <Property id="MAX_RAW_COUNT" value="0"/>
                 <Property id="ROW_MAX_RAW_COUNT" value="0"/>
-                <Property id="FINGER_TH" value="40"/>
+                <Property id="FINGER_TH" value="70"/>
                 <Property id="PROX_TOUCH_TH" value="100"/>
                 <Property id="NOISE_TH" value="20"/>
                 <Property id="NNOISE_TH" value="40"/>
                 <Property id="LOW_BSLN_RST" value="30"/>
-                <Property id="HYSTERESIS" value="5"/>
+                <Property id="HYSTERESIS" value="10"/>
                 <Property id="ON_DEBOUNCE" value="3"/>
                 <Property id="VELOCITY" value="2500"/>
                 <Property id="CM_FILTER" value="false"/>
@@ -212,7 +212,7 @@
                 </Electrode>
                 <Electrode id="Sns1" kind="Sensor">
                     <ElectrodeProperties>
-                        <Property id="IDAC0" value="32"/>
+                        <Property id="IDAC0" value="38"/>
                         <Property id="IDAC1" value="32"/>
                         <Property id="IDAC2" value="32"/>
                         <Property id="PINS" value="Dedicated pin"/>
@@ -228,7 +228,7 @@
                 </Electrode>
                 <Electrode id="Sns3" kind="Sensor">
                     <ElectrodeProperties>
-                        <Property id="IDAC0" value="60"/>
+                        <Property id="IDAC0" value="70"/>
                         <Property id="IDAC1" value="32"/>
                         <Property id="IDAC2" value="32"/>
                         <Property id="PINS" value="Dedicated pin"/>
@@ -244,7 +244,7 @@
                 </Electrode>
                 <Electrode id="Sns5" kind="Sensor">
                     <ElectrodeProperties>
-                        <Property id="IDAC0" value="32"/>
+                        <Property id="IDAC0" value="38"/>
                         <Property id="IDAC1" value="32"/>
                         <Property id="IDAC2" value="32"/>
                         <Property id="PINS" value="Dedicated pin"/>
