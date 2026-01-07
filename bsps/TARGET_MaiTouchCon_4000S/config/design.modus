@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration app="BACKEND" formatVersion="15" lastSavedWith="Configurator Backend" lastSavedWithVersion="3.70.0" toolsPackage="ModusToolbox 3.7.0" xmlns="http://cypress.com/xsd/cydesignfile_v7">
     <Devices>
-        <Device mpn="CY8C4025AZI-S413">
+        <Device mpn="CY8C4045AZI-S413">
             <BlockConfig>
                 <Block location="msclp[0].msclp[0]">
                     <Aliases>
@@ -387,7 +387,7 @@
                         <Param id="calc" value="man"/>
                         <Param id="desFreq" value="48000000.000000"/>
                         <Param id="fracDivider" value="0"/>
-                        <Param id="intDivider" value="3"/>
+                        <Param id="intDivider" value="6"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
@@ -407,7 +407,7 @@
                         <Param id="calc" value="man"/>
                         <Param id="desFreq" value="24000000.000000"/>
                         <Param id="fracDivider" value="0"/>
-                        <Param id="intDivider" value="2"/>
+                        <Param id="intDivider" value="4"/>
                         <Param id="startOnReset" value="true"/>
                     </Parameters>
                 </Personality>
@@ -503,7 +503,7 @@
                 <Personality template="m0s8imo" version="1.0" instance="ECv89Lvornc">
                     <Block location="srss[0].clock[0].imo[0]" locked="true"/>
                     <Parameters>
-                        <Param id="frequency" value="24000000"/>
+                        <Param id="frequency" value="48000000"/>
                         <Param id="trim" value="2"/>
                     </Parameters>
                 </Personality>
