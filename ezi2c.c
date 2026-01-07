@@ -58,14 +58,12 @@ void ezi2c_isr(void)
 
 void update_i2c_buffer(void){
     uint16_t touch_mask = 0;
-    for(uint8_t i = 0; i < CY_CAPSENSE_TOTAL_WIDGET_COUNT; i++){
-        for(uint8_t j = 0; j < 6; j++){
-            if (Cy_CapSense_IsSensorActive(i, j, &cy_capsense_context)) {
-                touch_mask |= (1 << widget_to_out[i][j]);
-            }
-        }
-        //touch_mask |= (cy_capsense_context.ptrWdContext[0].status & CY_CAPSENSE_WD_ACTIVE_MASK) << i;
+    for(uint8_t i = 0; i < CY_CAPSENSE_SENSOR_COUNT; i++){
+        // if (/*Cy_CapSense_IsSensorActive(0, i, &cy_capsense_context)*/) {
+        //     touch_mask |= (1 << i);
+            
+        // }
+        touch_mask |= (cy_capsense_context.ptrWdConfig[0].ptrSnsContext[i].status & CY_CAPSENSE_WD_ACTIVE_MASK) << i;
     }
-    i2c_buffer[0] = (uint8_t)(touch_mask & 0xFF);
-    i2c_buffer[1] = (uint8_t)((touch_mask >> 8) & 0x0F);
+    memcpy(i2c_buffer, &touch_mask, 2);
 }

@@ -31,6 +31,8 @@ extern uint8_t i2c_buffer[REG_MAP_SIZE];
 static void initialize_capsense(void);
 static void capsense_isr(void);
 void initialize_capsense_tuner(void);
+void SysTick_Callback();
+bool scan = 0, tuner_en = 1;
 
 #if CY_CAPSENSE_BIST_EN
 static void measure_sensor_cp(void);
@@ -70,24 +72,61 @@ int main(void)
     /* Enable global interrupts */
     __enable_irq();
     initialize_capsense();
+
     initialize_capsense_tuner();
     initialize_i2c();
+
+
+    //Cy_SysTick_SetCallback(0UL, &SysTick_Callback);
+
     /* Start the first scan */
     Cy_CapSense_ScanAllWidgets(&cy_capsense_context);
+    uint8_t s0 = 0, s1= 0;
+    volatile uint32_t test = Cy_SysTick_GetValue();
     for (;;)
-    {
-        if(CY_CAPSENSE_NOT_BUSY == Cy_CapSense_IsBusy(&cy_capsense_context))
-        {
-            Cy_CapSense_ProcessAllWidgets(&cy_capsense_context);
-            Cy_CapSense_RunTuner(&cy_capsense_context);
-#if CY_CAPSENSE_BIST_EN
-            /* Measure the self capacitance of sensor electrode using BIST */
-            measure_sensor_cp();
-#endif /* CY_CAPSENSE_BIST_EN */
-            Cy_GPIO_Inv(CYBSP_STATUS_LED_PORT, CYBSP_STATUS_LED_NUM);
-            //led_control();
-            update_i2c_buffer();
-            Cy_CapSense_ScanAllWidgets(&cy_capsense_context);
+    {       
+        if(1){
+            if(CY_CAPSENSE_NOT_BUSY == Cy_CapSense_IsBusy(&cy_capsense_context))
+            {
+                /* Store the current sensor index */
+                s0 = s1;
+                /* Go to the next sensor */
+                s1++;
+                if (s1 == cy_capsense_context.ptrWdConfig[CY_CAPSENSE_BUTTON0_WDGT_ID].numSns)
+                {
+                    /* Reset sensor index to start from the first sensor */
+                    s1 = 0u;
+                }
+                /* The next sensor scan start */
+                Cy_CapSense_ScanSensor(CY_CAPSENSE_BUTTON0_WDGT_ID, s1, &cy_capsense_context);
+                /* Process the previous sensor while scanning the next one */
+                Cy_CapSense_ProcessSensorExt(CY_CAPSENSE_BUTTON0_WDGT_ID, s0, CY_CAPSENSE_PROCESS_ALL, &cy_capsense_context);
+                s0++;
+                if (s0 == cy_capsense_context.ptrWdConfig[CY_CAPSENSE_BUTTON0_WDGT_ID].numSns)
+                {
+                    /* All widget sensors are processed, therefore process only widget-related task */
+                    Cy_CapSense_ProcessWidgetExt(CY_CAPSENSE_BUTTON0_WDGT_ID, CY_CAPSENSE_PROCESS_STATUS, &cy_capsense_context);
+                    if(tuner_en){
+                        Cy_CapSense_RunTuner(&cy_capsense_context);
+                    }
+                    else{
+                        Cy_GPIO_Inv(CYBSP_STATUS_LED_PORT, CYBSP_STATUS_LED_NUM);
+                    }
+                    test = Cy_SysTick_GetValue();
+                    if(test > 40000){
+                        test = 0;
+                    }
+                }
+                scan = 0;
+                // Cy_CapSense_ProcessWidgets(&cy_capsense_context);
+                //led_control();
+                //Cy_CapSense_ScanAllWidgets(&cy_capsense_context);
+                // Cy_CapSense_SetupWidgetExt(0, s, &cy_capsense_context);
+                // Cy_CapSense_ScanExt(&cy_capsense_context);
+            }
+            else{
+                update_i2c_buffer();
+            }
         }
     }
 }
@@ -122,10 +161,18 @@ static void capsense_isr(void)
 
 void initialize_capsense_tuner(void)
 {
+    Cy_GPIO_Write(TUNER_EN_PORT,TUNER_EN_NUM, 1);
+    if(Cy_GPIO_Read(TUNER_EN_PORT, TUNER_EN_NUM)){
+        tuner_en = 0;
+        return;
+    }
+    
     initialize_uart_tuner();
 }
 
-
+void SysTick_Callback(){
+    scan = 1;
+}
 #if CY_CAPSENSE_BIST_EN
 /*******************************************************************************
 * Function Name: measure_sensor_cp

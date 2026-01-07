@@ -35,18 +35,18 @@
                         <Param id="CsdIdacEnable" value="false"/>
                         <Param id="SensorCount" value="13"/>
                         <Param id="SensorName0" value="Cmod"/>
-                        <Param id="SensorName1" value="LinearSlider0_Sns0"/>
-                        <Param id="SensorName10" value="LinearSlider1_Sns3"/>
-                        <Param id="SensorName11" value="LinearSlider1_Sns4"/>
-                        <Param id="SensorName12" value="LinearSlider1_Sns5"/>
-                        <Param id="SensorName2" value="LinearSlider0_Sns1"/>
-                        <Param id="SensorName3" value="LinearSlider0_Sns2"/>
-                        <Param id="SensorName4" value="LinearSlider0_Sns3"/>
-                        <Param id="SensorName5" value="LinearSlider0_Sns4"/>
-                        <Param id="SensorName6" value="LinearSlider0_Sns5"/>
-                        <Param id="SensorName7" value="LinearSlider1_Sns0"/>
-                        <Param id="SensorName8" value="LinearSlider1_Sns1"/>
-                        <Param id="SensorName9" value="LinearSlider1_Sns2"/>
+                        <Param id="SensorName1" value="Button0_Sns0"/>
+                        <Param id="SensorName10" value="Button0_Sns9"/>
+                        <Param id="SensorName11" value="Button0_Sns10"/>
+                        <Param id="SensorName12" value="Button0_Sns11"/>
+                        <Param id="SensorName2" value="Button0_Sns1"/>
+                        <Param id="SensorName3" value="Button0_Sns2"/>
+                        <Param id="SensorName4" value="Button0_Sns3"/>
+                        <Param id="SensorName5" value="Button0_Sns4"/>
+                        <Param id="SensorName6" value="Button0_Sns5"/>
+                        <Param id="SensorName7" value="Button0_Sns6"/>
+                        <Param id="SensorName8" value="Button0_Sns7"/>
+                        <Param id="SensorName9" value="Button0_Sns8"/>
                         <Param id="acqTime" value="10"/>
                         <Param id="autoCalibrInterval" value="30"/>
                         <Param id="azTime" value="5"/>
@@ -365,6 +365,22 @@
                         <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
+                <Personality template="m0s8pin" version="2.0" instance="HK273_jAREM">
+                    <Block location="ioss[0].port[4].pin[3]" locked="true">
+                        <Aliases>
+                            <Alias value="TUNER_EN"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
+                        <Param id="inFlash" value="true"/>
+                        <Param id="initialState" value="1"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="portLevelConfig" value="false"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
+                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="m0s8peripheralclock" version="1.0" instance="MnzlnxB9QNg">
                     <Block location="peri[0].div_16[0]" locked="true"/>
                     <Parameters>
@@ -467,6 +483,13 @@
                 <Personality template="m0s8sysclocks" version="2.0" instance="mIGETtp_sNI">
                     <Block location="srss[0].clock[0]" locked="true"/>
                 </Personality>
+                <Personality template="m0s8altsystick" version="1.0" instance="m_8I8EV5IEM">
+                    <Block location="srss[0].clock[0].altsystickclk[0]" locked="true"/>
+                    <Parameters>
+                        <Param id="Reload" value="39999"/>
+                        <Param id="sourceClock" value="LFCLK"/>
+                    </Parameters>
+                </Personality>
                 <Personality template="m0s8hfclk" version="3.0" instance="ZFEyUV6CZGI">
                     <Block location="srss[0].clock[0].hfclk[0]" locked="true"/>
                     <Parameters>
@@ -561,34 +584,34 @@
                         <Port name="ioss[0].port[1].pin[5].analog[0]"/>
                     </Arm>
                     <Arm>
-                        <Port name="ioss[0].port[2].pin[0].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[1].pin[7].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[2].pin[3].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[2].pin[7].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[3].pin[0].analog[0]"/>
-                    </Arm>
-                    <Arm>
                         <Port name="ioss[0].port[1].pin[6].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[2].pin[0].analog[0]"/>
                     </Arm>
                     <Arm>
                         <Port name="ioss[0].port[2].pin[2].analog[0]"/>
                     </Arm>
                     <Arm>
+                        <Port name="ioss[0].port[1].pin[7].analog[0]"/>
+                    </Arm>
+                    <Arm>
                         <Port name="ioss[0].port[2].pin[1].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[2].pin[3].analog[0]"/>
                     </Arm>
                     <Arm>
                         <Port name="ioss[0].port[2].pin[5].analog[0]"/>
                     </Arm>
                     <Arm>
+                        <Port name="ioss[0].port[2].pin[7].analog[0]"/>
+                    </Arm>
+                    <Arm>
                         <Port name="ioss[0].port[2].pin[6].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[3].pin[0].analog[0]"/>
                     </Arm>
                     <Arm>
                         <Port name="ioss[0].port[3].pin[1].analog[0]"/>
