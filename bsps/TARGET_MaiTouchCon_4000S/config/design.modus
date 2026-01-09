@@ -33,12 +33,10 @@
                         <Param id="CsdIdacAselect" value="CY_CSDIDAC_GPIO"/>
                         <Param id="CsdIdacBselect" value="CY_CSDIDAC_DISABLED"/>
                         <Param id="CsdIdacEnable" value="false"/>
-                        <Param id="SensorCount" value="13"/>
+                        <Param id="SensorCount" value="11"/>
                         <Param id="SensorName0" value="Cmod"/>
                         <Param id="SensorName1" value="Button0_Sns0"/>
                         <Param id="SensorName10" value="Button0_Sns9"/>
-                        <Param id="SensorName11" value="Button0_Sns10"/>
-                        <Param id="SensorName12" value="Button0_Sns11"/>
                         <Param id="SensorName2" value="Button0_Sns1"/>
                         <Param id="SensorName3" value="Button0_Sns2"/>
                         <Param id="SensorName4" value="Button0_Sns3"/>
@@ -609,12 +607,6 @@
                     </Arm>
                     <Arm>
                         <Port name="ioss[0].port[2].pin[6].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[3].pin[0].analog[0]"/>
-                    </Arm>
-                    <Arm>
-                        <Port name="ioss[0].port[3].pin[1].analog[0]"/>
                     </Arm>
                 </Mux>
             </Netlist>
