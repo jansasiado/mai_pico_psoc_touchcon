@@ -53,7 +53,6 @@ uint8_t initialize_i2c(void){
 void ezi2c_isr(void)
 {
     Cy_SCB_EZI2C_Interrupt(CYBSP_I2C_HW, &cybsp_ezi2c_context); 
-    //update_param();
     load_sns_val();
 }
 
@@ -80,10 +79,6 @@ void load_sns_val(void){
         if(i>11){
             return;
         }
-        if(i==0){
-            i++;
-            i--;
-        }
         i2c_buffer[PSOC_IDAC_COMP_VAL_REG]=cy_capsense_context.ptrWdConfig[0].ptrSnsContext[i].idacComp;
     }
     i2c_buffer[PSOC_READ_CMD_REG] = 0;
@@ -91,10 +86,6 @@ void load_sns_val(void){
 void update_i2c_buffer(void){
     uint16_t touch_mask = 0;
     for(uint8_t i = 0; i < CY_CAPSENSE_SENSOR_COUNT; i++){
-        // if (/*Cy_CapSense_IsSensorActive(0, i, &cy_capsense_context)*/) {
-        //     touch_mask |= (1 << i);
-            
-        // }
         touch_mask |= (cy_capsense_context.ptrWdConfig[0].ptrSnsContext[i].status & CY_CAPSENSE_WD_ACTIVE_MASK) << i;
     }
     memcpy(i2c_buffer, &touch_mask, 2);
@@ -128,7 +119,6 @@ void update_param(){
             i2c_buffer[PSOC_CMD_REG] = i2c_buffer[PSOC_CMD_REG] & ~(1<<6);
         }
         if(i2c_buffer[PSOC_CMD_REG]&(1<<7)){
-            uint32_t temp = 0;
             switch(i2c_buffer[PSOC_IDAC_COMP_N_REG]){
                 case 0:
                 Cy_CapSense_SetParam(CY_CAPSENSE_BUTTON0_SNS0_IDAC0_PARAM_ID, i2c_buffer[PSOC_IDAC_COMP_VAL_REG], &cy_capsense_tuner, &cy_capsense_context);
@@ -158,15 +148,12 @@ void update_param(){
                 Cy_CapSense_SetParam(CY_CAPSENSE_BUTTON0_SNS8_IDAC0_PARAM_ID, i2c_buffer[PSOC_IDAC_COMP_VAL_REG], &cy_capsense_tuner, &cy_capsense_context);
                 break;
                 case 9:
-                //Cy_CapSense_GetParam(CY_CAPSENSE_BUTTON0_SNS9_IDAC0_PARAM_ID, &temp, &cy_capsense_tuner, &cy_capsense_context);
                 Cy_CapSense_SetParam(CY_CAPSENSE_BUTTON0_SNS9_IDAC0_PARAM_ID, i2c_buffer[PSOC_IDAC_COMP_VAL_REG], &cy_capsense_tuner, &cy_capsense_context);
                 break;
                 case 10:
-                //Cy_CapSense_GetParam(CY_CAPSENSE_BUTTON0_SNS10_IDAC0_PARAM_ID, &temp, &cy_capsense_tuner, &cy_capsense_context);
                 Cy_CapSense_SetParam(CY_CAPSENSE_BUTTON0_SNS10_IDAC0_PARAM_ID, i2c_buffer[PSOC_IDAC_COMP_VAL_REG], &cy_capsense_tuner, &cy_capsense_context);
                 break;
                 case 11:
-                //Cy_CapSense_GetParam(CY_CAPSENSE_BUTTON0_SNS11_IDAC0_PARAM_ID, &temp, &cy_capsense_tuner, &cy_capsense_context);
                 Cy_CapSense_SetParam(CY_CAPSENSE_BUTTON0_SNS11_IDAC0_PARAM_ID, i2c_buffer[PSOC_IDAC_COMP_VAL_REG], &cy_capsense_tuner, &cy_capsense_context);
                 break;
                 default:
@@ -175,7 +162,6 @@ void update_param(){
             }
             i2c_buffer[PSOC_CMD_REG] = i2c_buffer[PSOC_CMD_REG] & ~(1<<7);
         }
-        //Cy_CapSense_Enable(&cy_capsense_context);
         i2c_buffer[PSOC_CMD_REG] &= ~(1<<1);
     }
 }

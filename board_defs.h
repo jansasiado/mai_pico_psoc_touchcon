@@ -4,7 +4,6 @@
 #define SETUP_INTR_PRIORITY             (2u)
 #define CY_ASSERT_FAILED                (0u)
 
-
 #define I2C_SLAVE_ADDR_START 0x5AU
 #define PSOC_TOUCH_STATUS_REG 0x0
 #define PSOC_RAW_VALUE_REG_START 0x02

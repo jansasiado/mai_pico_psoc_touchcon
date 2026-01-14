@@ -22,7 +22,6 @@ uint32_t sensor_cp = 0;
 cy_en_capsense_bist_status_t status;
 #endif /* CY_CAPSENSE_BIST_EN */
 bool scan = 0;
-extern bool tuner_en;
 /*******************************************************************************
 * Function Prototypes
 *******************************************************************************/
@@ -32,22 +31,6 @@ void SysTick_Callback();
 static void measure_sensor_cp(void);
 #endif /* CY_CAPSENSE_BIST_EN */
 
-
-/*******************************************************************************
-* Function Name: main
-********************************************************************************
-* Summary:
-*  System entrance point. This function performs
-*  - initial setup of device
-*  - initialize CapSense
-*  - initialize tuner communication
-*  - perform Cp measurement if Built-in Self test (BIST) is enabled
-*  - scan touch input continuously
-*
-* Return:
-*  int
-*
-*******************************************************************************/
 int main(void)
 {
     cy_rslt_t result = CY_RSLT_SUCCESS;
@@ -59,11 +42,10 @@ int main(void)
     __enable_irq();
     uint8_t i2c_address = initialize_i2c();
     uint8_t numSns = initialize_capsense(i2c_address);
-    initialize_capsense_tuner();
+    bool tuner_en = initialize_capsense_tuner();
     Cy_SysTick_SetCallback(0UL, &SysTick_Callback);
     Cy_CapSense_ScanAllWidgets(&cy_capsense_context);
     uint8_t s0 = 0, s1= 0;
-    //volatile uint32_t test = Cy_SysTick_GetValue();
     for (;;)
     {       
         if(CY_CAPSENSE_NOT_BUSY == Cy_CapSense_IsBusy(&cy_capsense_context))
@@ -98,11 +80,10 @@ int main(void)
     }
 }
 
-
-
 void SysTick_Callback(){
     scan = 1;
 }
+
 #if CY_CAPSENSE_BIST_EN
 /*******************************************************************************
 * Function Name: measure_sensor_cp

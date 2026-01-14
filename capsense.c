@@ -2,7 +2,6 @@
 #include "cycfg_capsense.h"
 // #include "cycfg_peripherals.h"
 #include "capsense.h"
-extern uint8_t i2c_address;
 
 const cy_stc_sysint_t capsense_interrupt_config =
 {
@@ -13,9 +12,6 @@ const cy_stc_sysint_t capsense_interrupt_config =
 uint8_t initialize_capsense(uint8_t i2c_address)
 {
     volatile cy_capsense_status_t status = CY_CAPSENSE_STATUS_SUCCESS;
-    
-    
-    
     status = Cy_CapSense_Init(&cy_capsense_context);
     if (CY_CAPSENSE_STATUS_SUCCESS == status)
     {
