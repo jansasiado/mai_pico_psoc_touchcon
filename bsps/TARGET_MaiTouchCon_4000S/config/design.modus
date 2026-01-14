@@ -125,16 +125,32 @@
                         <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
                     </Parameters>
                 </Personality>
-                <Personality template="m0s8pin" version="2.0" instance="PJ1EOZu--mU">
-                    <Block location="ioss[0].port[1].pin[0]" locked="true">
+                <Personality template="m0s8pin" version="2.0" instance="xRlic9U-N5o">
+                    <Block location="ioss[0].port[1].pin[1]" locked="true">
                         <Aliases>
-                            <Alias value="CYBSP_CSD_BTN0"/>
+                            <Alias value="STATUS1"/>
                         </Aliases>
                     </Block>
                     <Parameters>
-                        <Param id="DriveModes" value="CY_GPIO_DM_OD_DRIVESLOW"/>
+                        <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
                         <Param id="inFlash" value="true"/>
-                        <Param id="initialState" value="1"/>
+                        <Param id="initialState" value="0"/>
+                        <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
+                        <Param id="portLevelConfig" value="false"/>
+                        <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
+                        <Param id="vtrip" value="CY_GPIO_VTRIP_CMOS"/>
+                    </Parameters>
+                </Personality>
+                <Personality template="m0s8pin" version="2.0" instance="ENun08OLDLo">
+                    <Block location="ioss[0].port[1].pin[3]" locked="true">
+                        <Aliases>
+                            <Alias value="STATUS2"/>
+                        </Aliases>
+                    </Block>
+                    <Parameters>
+                        <Param id="DriveModes" value="CY_GPIO_DM_STRONG"/>
+                        <Param id="inFlash" value="true"/>
+                        <Param id="initialState" value="0"/>
                         <Param id="isrTrigger" value="CY_GPIO_INTR_DISABLE"/>
                         <Param id="portLevelConfig" value="false"/>
                         <Param id="slewRate" value="CY_GPIO_SLEW_FAST"/>
@@ -487,7 +503,7 @@
                     <Block location="srss[0].clock[0].altsystickclk[0]" locked="true"/>
                     <Parameters>
                         <Param id="Reload" value="47999"/>
-                        <Param id="sourceClock" value="LFCLK"/>
+                        <Param id="sourceClock" value="SYSCLK"/>
                     </Parameters>
                 </Personality>
                 <Personality template="m0s8hfclk" version="3.0" instance="ZFEyUV6CZGI">

@@ -6,12 +6,14 @@
  *
  *******************************************************************************/
 
+#include "cybsp.h"
 #include "tuner.h"
 #include "SEGGER_RTT/RTT/SEGGER_RTT.h"
 
 /*******************************************************************************
  * Global Variables
  *******************************************************************************/
+bool tuner_en = 0;
 
 /* EZI2C-specific context */
 #if (TUNER_INTERFACE_TYPE == EZI2C)
@@ -292,4 +294,15 @@ void uart_interrupt(void)
 
 #endif
 
+
+void initialize_capsense_tuner(void)
+{
+    Cy_GPIO_Write(TUNER_EN_PORT,TUNER_EN_NUM, 1);
+    if(Cy_GPIO_Read(TUNER_EN_PORT, TUNER_EN_NUM)){
+        tuner_en = 0;
+        return;
+    }
+    
+    initialize_uart_tuner();
+}
 /* [] END OF FILE */

@@ -78,6 +78,7 @@ void uart_tuner_send(void *context);
 void uart_tuner_receive(uint8_t **packet, uint8_t **tuner_packet, void *context);
 void uart_interrupt(void);
 void initialize_uart_tuner(void);
+void initialize_capsense_tuner(void);
 #endif
 
 #endif /* TUNER_H */
